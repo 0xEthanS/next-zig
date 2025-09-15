@@ -7,11 +7,11 @@ An OS app where zig code is embedded in a nextjs app, optimized for serverless
 ### Why Next and Zig?
 NextJS is probably the most wide spread and most accessible way to setup a NodeJS project, it has largely been responsible for deprecating create-react-app. What we need access to is the Node runtime in this instance. Bun or Deno are obviously excellent choices too, but Node is widely distributed and comes included in the install.
 
-Why Zig? Aside from it being an incredibly cool and new project that's attempting to take on systems programming without being based on the C stdlib, it has a similar batteries included approach when it comes to the compiler. Whereas with Rust, cross-compilation is easier than it would be with C, with Zig, cross-compilation is built in from the start. During compilation you simply instruct the compiler to compie to x86, ARM64, WebAssembly, etc. and you recieve your binaries
+Why Zig? Aside from it being an incredibly cool and new project that's attempting to take on systems programming without being based on the C stdlib, it has a similar batteries included approach when it comes to the compiler. Whereas with Rust, cross-compilation is easier than it would be with C, with Zig, cross-compilation is built in from the start. During compilation you simply instruct the compiler to compie to x64, ARM64, WebAssembly, etc. and you recieve your binaries
 
 ex. "zig build -Dtarget=x86_64-windows"
 
-What does Node have to do with this? As a brief overview, you can run your Zig binaries within Node's child_process and the time to spawn a child_process is approximately 1-5ms. Now that we have our code cross-compiled, you can use Node's arch_process to detect which compute arhitecture (ie. x86, ARM64) your Node environment is executing in, and run the correct set of binaries you have previously cros-compiled. 
+What does Node have to do with this? As a brief overview, you can run your Zig binaries within Node's child_process and the time to spawn a child_process is approximately 1-5ms. Now that we have our code cross-compiled, you can use Node's arch_process to detect which compute arhitecture (ie. x64, ARM64) your Node environment is executing in, and run the correct set of binaries you have previously cros-compiled. 
 
 
 
@@ -27,3 +27,5 @@ I think serverless is one of those things that isn't getting a lot of the respec
 
 
 
+
+### Project Overview
