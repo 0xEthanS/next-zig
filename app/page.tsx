@@ -16,7 +16,7 @@ export default function Home() {
 
 
 
-				{valueArray.map((i:any) => (
+				{valueArray.map((i:string) => (
 					<p 
 						key={i} 
 						className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left mb-2 tracking-[-.01em]"
