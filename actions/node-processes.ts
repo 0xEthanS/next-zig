@@ -12,7 +12,8 @@ import path from "node:path";
 
 export function NodeProcess() {
 
-
+    
+    // Node Proces Variable
     const arch = process.arch;
     const platform = process.platform;
     const availableMemory = process.availableMemory();
@@ -22,8 +23,13 @@ export function NodeProcess() {
     const parentPid = process.ppid;
     
 
+    // Node Process time
     const start = process.hrtime();
     const end = process.hrtime(start);
+
+
+    // Vercel Variables
+    const region = process.env.VERCEL_REGION
     
 
 
@@ -45,6 +51,8 @@ export function NodeProcess() {
         `Current Working Directory: ${cwd}`, 
         `Process PID: ${pid}`, 
         `Parent PID: ${parentPid}`, 
+
+        `Vercel Edge Region: ${region}`, 
 
         `Operations took ${end[0]} seconds and ${end[1]} nanoseconds`, 
     ];
