@@ -36,3 +36,10 @@ I think serverless is one of those things that isn't getting a lot of the respec
     - "ia32" for x86 32-bit
     - "arm64" for ARM 64-bit
     - "arm" for ARM 32-bit
+
+
+
+
+### Retaining executables in git:
+
+chmod +x zig/binaries/*/adder    
