@@ -2,7 +2,7 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   outputFileTracingIncludes: {
-    '/actions/**': ['./zig/binaries/**/*'],
+    '/*': ['./zig/binaries/**/*'],
   },
 };
 
