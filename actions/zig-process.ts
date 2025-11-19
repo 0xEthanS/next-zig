@@ -35,6 +35,7 @@ export async function zigAdderFunction({ a, b }:{ a: number, b: number }) {
 
 		let binaryPath
 		const isVercel = process?.env?.VERCEL === "1";
+		console.log("---------- Is Vercel: ", isVercel);
 
 
 		if (isVercel) {
