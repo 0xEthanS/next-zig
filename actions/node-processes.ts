@@ -10,7 +10,7 @@ import path from "node:path";
 
 
 
-export function NodeProcess() {
+export function NodeProcessValues() {
 
     
     // Node Proces Variable
@@ -32,15 +32,11 @@ export function NodeProcess() {
     const region = process.env.VERCEL_REGION
     
 
-
-
     const processID = process.getgid;
     const ipcChannel = process.channel;
     const configObject = process.config;
     const userEnvironment = process.env;
     const resourceUsage = process.resourceUsage();
-
-
 
 
     const valueArray = [
@@ -58,11 +54,11 @@ export function NodeProcess() {
     ];
 
 
-
-
     return valueArray;
 
-}
+};
+
+
 
 
 
