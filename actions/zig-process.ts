@@ -3,8 +3,8 @@
 import { spawn } from "node:child_process";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { copyFileSync, existsSync, chmodSync } from 'fs';
 
-// Get the directory of the current file
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -24,23 +24,33 @@ export async function zigAdderFunction({ a, b }: { a: number, b: number }) {
             routeExtension = "x64-darwin"
         }
 
-        // Relative path from actions/ to zig/binaries/
-        const binaryPath = path.join(__dirname, '..', 'zig', 'binaries', routeExtension, 'adder');
+        const sourcePath = path.join(__dirname, '..', 'zig', 'binaries', routeExtension, 'adder');
         
-        console.log('Resolved binary path:', binaryPath);
 
-        const childProcess = spawn(binaryPath);
+        const tmpBinaryPath = `/tmp/adder-${routeExtension}`;
+        
+
+        if (!existsSync(tmpBinaryPath)) {
+            try {
+                copyFileSync(sourcePath, tmpBinaryPath);
+                chmodSync(tmpBinaryPath, 0o755);
+            } catch (err) {
+                reject(new Error(`Failed to setup binary: ${err}`));
+                return;
+            }
+        }
+
+        const childProcess = spawn(tmpBinaryPath);
 
         let output = "";
 
         childProcess.stdout.on("data", (i) => {
             output += i.toString();
-        })
+        });
 
         childProcess.on('close', (i) => {
-            console.log('Process closed with code:', i);
             if (i === 0) {
-                const result = parseInt(output.trim(), 10)
+                const result = parseInt(output.trim(), 10);
                 resolve(result);
             } else {
                 reject(new Error(`Process exited with code ${i}`));
