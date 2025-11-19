@@ -3,11 +3,10 @@
 import { spawn } from "node:child_process";
 import path from 'path';
 import { fileURLToPath } from 'url';
+import fs from 'fs';
 
 
 const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 
 
 
@@ -33,16 +32,12 @@ export async function zigAdderFunction({ a, b }:{ a: number, b: number }) {
 		}
 
 
-		let binaryPath
-		const isVercel = process?.env?.VERCEL === "1";
-		console.log("---------- Is Vercel: ", isVercel);
+	
 
 
-		if (isVercel) {
-			binaryPath = path.join(process.cwd(), 'binaries', routeExtension, 'adder');
-		} else {
-			binaryPath = path.join(__dirname, '..', 'public', 'binaries', routeExtension, 'adder');
-		}
+		const binaryPath = path.join(process.cwd(), 'zig', 'binaries', routeExtension, 'adder');
+		console.log("---------- Binary Path: ", binaryPath);
+		console.log("---------- Binary exists:", fs.existsSync(binaryPath));
 
 
 
